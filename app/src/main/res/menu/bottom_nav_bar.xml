@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/idHome"
+            android:title="Home"
+            android:icon="@drawable/home_nav"/>
+        <item android:id="@+id/idPersonal"
+            android:title="My Space"
+            android:icon="@drawable/person_nav"/>
+    </group>
+</menu>
