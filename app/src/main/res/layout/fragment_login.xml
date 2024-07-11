@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".auth.view.LoginFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/idImage"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/wave"
+            android:scaleType="fitXY"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:textStyle="bold"
+            android:text="LOGIN"
+            android:textSize="40sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idImage"
+            android:orientation="vertical"
+            android:padding="30dp"
+            tools:layout_editor_absoluteX="-90dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <EditText
+                android:id="@+id/idAuthLogMail"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="5dp"
+                android:hint="Enter your Email" />
+
+            <EditText
+                android:id="@+id/idAuthLogPassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="5dp"
+                android:hint="Enter your Password" />
+
+            <Button
+                android:id="@+id/idAuthLogBtn"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:text="LOG-IN" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>
