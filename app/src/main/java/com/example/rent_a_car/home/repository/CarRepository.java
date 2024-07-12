@@ -46,58 +46,34 @@ public class CarRepository {
     }
     
     public void addCarAll(CarRent carRent){
-        carImageReference.putFile(Uri.parse(carRent.getImgUrl())).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                carImageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        String imgUrl = uri.toString();
-                        carRent.setImgUrl(imgUrl);
-                        carReference.document().set(carRent).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    addCarPersonal(carRent);
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-                Log.v("Repo",e.getMessage());
-            }
-        });
+        carImageReference.putFile(Uri.parse(carRent.getImgUrl()))
+                .addOnSuccessListener(taskSnapshot->{
+                carImageReference.getDownloadUrl()
+                        .addOnSuccessListener(uri-> {
+                            String imgUrl = uri.toString();
+                            carRent.setImgUrl(imgUrl);
+                            carReference.document().set(carRent)
+                                    .addOnCompleteListener(task->{
+                                        if(task.isSuccessful()){
+                                            addCarPersonal(carRent);
+                                        }
+                                    })
+                                    .addOnFailureListener(e->Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show());
+                        }).addOnFailureListener(Throwable::printStackTrace);
+                })
+                .addOnFailureListener(e-> {
+                    e.printStackTrace();
+                    Log.v("Repo",e.getMessage());});
     }
 
     private void addCarPersonal(CarRent carRent){
-        userReference.document(firebaseUser.getUid()).collection(carCollection).document().set(carRent).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        userReference.document(firebaseUser.getUid()).collection(carCollection).document().set(carRent)
+                .addOnCompleteListener(task-> {
+                    if(task.isSuccessful()){
+                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e->Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
 }
