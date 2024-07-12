@@ -2,24 +2,29 @@ package com.example.rent_a_car.auth.repository;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-import com.example.rent_a_car.MainActivity;
 import com.example.rent_a_car.auth.model.Users;
 import com.example.rent_a_car.auth.service.UserService;
 import com.example.rent_a_car.auth.view.AuthActivity;
-import com.example.rent_a_car.home.HomeActivity;
+import com.example.rent_a_car.home.views.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class AuthRepo {
     private final String userCollection = "users";
@@ -92,5 +97,25 @@ public class AuthRepo {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
+    }
+
+    public MutableLiveData<Users> getUserDetails(String uid){
+        MutableLiveData<Users> liveData = new MutableLiveData<>();
+        collectionReference.document("Jl02lxYwmph6If3H2GaButFCa8q2").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Users user = documentSnapshot.toObject(Users.class);
+                liveData.postValue(user);
+                Log.v("Database","USER LIVE DATA FETCHED");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+                System.out.println(e.getMessage());
+                Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        return liveData;
     }
 }

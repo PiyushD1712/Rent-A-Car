@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.rent_a_car.auth.model.Users;
 import com.example.rent_a_car.auth.repository.AuthRepo;
@@ -27,5 +28,8 @@ public class AuthViewModel extends AndroidViewModel {
     }
     public void logoutUser(){
         service.logoutUser();
+    }
+    public MutableLiveData<Users> getUserDetails(String uid){
+        return service.getUserDetail(uid);
     }
 }

@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import com.example.rent_a_car.R;
 import com.example.rent_a_car.databinding.ActivityAuthBinding;
-import com.example.rent_a_car.home.HomeActivity;
+import com.example.rent_a_car.home.views.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

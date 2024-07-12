@@ -15,7 +15,7 @@
         android:theme="@style/Theme.RentACar"
         tools:targetApi="31" >
         <activity
-            android:name=".home.HomeActivity"
+            android:name=".home.views.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.RentACar" />

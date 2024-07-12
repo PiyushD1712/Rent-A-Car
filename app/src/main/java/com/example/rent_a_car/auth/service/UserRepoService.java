@@ -2,6 +2,8 @@ package com.example.rent_a_car.auth.service;
 
 import android.content.Context;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.rent_a_car.auth.model.Users;
 import com.example.rent_a_car.auth.repository.AuthRepo;
 
@@ -21,5 +23,8 @@ public class UserRepoService {
     }
     public void logoutUser(){
         repo.logoutUser();
+    }
+    public MutableLiveData<Users> getUserDetail(String uid){
+        return repo.getUserDetails(uid);
     }
 }
