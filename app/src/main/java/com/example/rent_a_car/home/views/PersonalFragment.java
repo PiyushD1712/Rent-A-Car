@@ -52,12 +52,7 @@ public class PersonalFragment extends Fragment {
         btnSave = view.findViewById(R.id.idPersonalCarBtn);
         imageView = view.findViewById(R.id.idAddPhoto);
 
-        mTakePhoto = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
-            @Override
-            public void onActivityResult(Uri o) {
-                imgUri = o;
-            }
-        });
+        mTakePhoto = registerForActivityResult(new ActivityResultContracts.GetContent(),o-> imgUri = o);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return view;

@@ -101,21 +101,16 @@ public class AuthRepo {
 
     public MutableLiveData<Users> getUserDetails(String uid){
         MutableLiveData<Users> liveData = new MutableLiveData<>();
-        collectionReference.document("Jl02lxYwmph6If3H2GaButFCa8q2").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Users user = documentSnapshot.toObject(Users.class);
-                liveData.postValue(user);
-                Log.v("Database","USER LIVE DATA FETCHED");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-                Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        collectionReference.document("Jl02lxYwmph6If3H2GaButFCa8q2").get()
+                .addOnSuccessListener(documentSnapshot-> {
+                    Users user = documentSnapshot.toObject(Users.class);
+                    liveData.postValue(user);
+                    Log.v("Database","USER LIVE DATA FETCHED");})
+                .addOnFailureListener(e-> {
+                    e.printStackTrace();
+                    System.out.println(e.getMessage());
+                    Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
         return liveData;
     }
 }

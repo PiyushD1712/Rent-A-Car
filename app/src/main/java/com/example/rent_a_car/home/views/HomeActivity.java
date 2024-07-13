@@ -55,5 +55,6 @@ public class HomeActivity extends AppCompatActivity {
                 binding.idUserName.setText("Hello, "+users.getLastName());
             }
         });
+        replaceFrag(new HomeFragment());
     }
 }

@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.rent_a_car.home.model.CarRent;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,10 +18,17 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarRepository {
     private final String userCollection="users";
@@ -76,5 +85,19 @@ public class CarRepository {
                 .addOnFailureListener(e->Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
+    public MutableLiveData<List<CarRent>> showAllCars(){
+        List<CarRent> list = new ArrayList<>();
+        MutableLiveData<List<CarRent>> mutableLiveData = new MutableLiveData<>();
+        carReference.get().addOnSuccessListener(queryDocumentSnapshots->{
+                for(QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
+                    list.add(snapshot.toObject(CarRent.class));
+                }
+                mutableLiveData.postValue(list);
+        }).addOnFailureListener(e->{
+                e.printStackTrace();
+                Toast.makeText(context, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+        return mutableLiveData;
+    }
 }
 
