@@ -24,14 +24,12 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private List<CarRent> list;
     private CarViewModel model;
     private CarListAdapter adapter;
     private RecyclerView recyclerView;
 
     public HomeFragment() {
         // Required empty public constructor
-        list = new ArrayList<>();
     }
 
     @Override
@@ -41,17 +39,8 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.idRecyclerView);
         model = new ViewModelProvider(this).get(CarViewModel.class);
-        model.showAllCars().observe(getViewLifecycleOwner(), new Observer<List<CarRent>>() {
-            @Override
-            public void onChanged(List<CarRent> carRents) {
-                list.addAll(carRents);
-                adapter = new CarListAdapter(getContext(),list);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
-        });
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
         return view;
     }
 
@@ -63,5 +52,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        model.showAllCars().observe(getViewLifecycleOwner(), new Observer<List<CarRent>>() {
+            @Override
+            public void onChanged(List<CarRent> carRents) {
+                adapter = new CarListAdapter(getContext(),carRents);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
