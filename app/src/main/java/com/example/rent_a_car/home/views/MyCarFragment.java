@@ -2,7 +2,6 @@ package com.example.rent_a_car.home.views;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -19,15 +18,15 @@ import com.example.rent_a_car.home.adapters.CarListAdapter;
 import com.example.rent_a_car.home.model.CarRent;
 import com.example.rent_a_car.home.viewmodel.CarViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
 
+public class MyCarFragment extends Fragment {
     private CarViewModel model;
     private CarListAdapter adapter;
     private RecyclerView recyclerView;
-    public HomeFragment() {
+
+    public MyCarFragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +40,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view=inflater.inflate(R.layout.fragment_my_car, container, false);
         recyclerView = view.findViewById(R.id.idRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        model.showAllCars().observe(getViewLifecycleOwner(), new Observer<List<CarRent>>() {
+        model.getPersonalCars().observe(getViewLifecycleOwner(), new Observer<List<CarRent>>() {
             @Override
             public void onChanged(List<CarRent> carRents) {
                 adapter = new CarListAdapter(getContext(),carRents);

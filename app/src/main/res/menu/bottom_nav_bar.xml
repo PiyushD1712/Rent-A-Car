@@ -7,5 +7,8 @@
         <item android:id="@+id/idPersonal"
             android:title="My Space"
             android:icon="@drawable/person_nav"/>
+        <item android:id="@+id/idMyCars"
+            android:title="My Cars"
+            android:icon="@drawable/person_nav"/>
     </group>
 </menu>

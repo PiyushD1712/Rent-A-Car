@@ -9,6 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.rent_a_car.home.model.CarRent;
 import com.example.rent_a_car.home.repository.CarRepository;
 
+import org.checkerframework.checker.units.qual.C;
+
 import java.util.List;
 
 public class CarViewModel extends AndroidViewModel {
@@ -24,5 +26,8 @@ public class CarViewModel extends AndroidViewModel {
     }
     public MutableLiveData<List<CarRent>> showAllCars(){
         return repository.showAllCars();
+    }
+    public MutableLiveData<List<CarRent>> getPersonalCars(){
+        return repository.getPersonalCars();
     }
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="car"
+            type="com.example.rent_a_car.home.model.CarRent" />
+        <variable
+            name="user"
+            type="com.example.rent_a_car.auth.model.Users" />
+    </data>
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".home.views.CarActivity">
+        <ImageView
+            android:id="@+id/idImageCar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:id="@+id/idCarName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{car.carName}"
+            android:layout_below="@id/idImageCar"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/idCarPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idImageCar"
+            android:textSize="30sp"
+            android:text="@{String.valueOf(car.price)}"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"/>
+        <TextView
+            android:id="@+id/idCarDescription"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="@{car.description}"
+            android:textSize="20sp"
+            android:layout_below="@id/idCarName"/>
+        <TextView
+            android:id="@+id/idCarOwner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="owner"
+            android:textSize="20sp"
+            android:layout_below="@id/idCarDescription"/>
+        <Button
+            android:id="@+id/idRentCarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Rent Car"/>
+    </RelativeLayout>
+</layout>

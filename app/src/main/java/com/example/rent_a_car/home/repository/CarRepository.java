@@ -99,5 +99,38 @@ public class CarRepository {
         });
         return mutableLiveData;
     }
+
+    public MutableLiveData<List<CarRent>> getPersonalCars(){
+        List<CarRent> list = new ArrayList<>();
+        MutableLiveData<List<CarRent>> mutableLiveData = new MutableLiveData<>();
+        userReference.document(firebaseUser.getUid()).collection(carCollection).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(QueryDocumentSnapshot snapshot: queryDocumentSnapshots){
+                    list.add(snapshot.toObject(CarRent.class));
+                }
+                mutableLiveData.postValue(list);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+                Log.v("MYCARDATABASE","NOT FETCHED "+e.getMessage());
+            }
+        });
+        return mutableLiveData;
+    }
+    public MutableLiveData<CarRent> getCarDetails(String carId){
+        MutableLiveData<CarRent> mutableLiveData = new MutableLiveData<>();
+        carReference.document(carId).get().addOnSuccessListener(documentSnapshot-> {
+                CarRent carRent = documentSnapshot.toObject(CarRent.class);
+                mutableLiveData.postValue(carRent);
+        }).addOnFailureListener(e-> {
+                e.printStackTrace();
+                Log.v("CAR_REPOSITORY","CAR NOT FETCHED");
+        });
+        return mutableLiveData;
+    }
+
 }
 

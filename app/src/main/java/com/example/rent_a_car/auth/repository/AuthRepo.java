@@ -101,7 +101,7 @@ public class AuthRepo {
 
     public MutableLiveData<Users> getUserDetails(String uid){
         MutableLiveData<Users> liveData = new MutableLiveData<>();
-        collectionReference.document("Jl02lxYwmph6If3H2GaButFCa8q2").get()
+        collectionReference.document(uid).get()
                 .addOnSuccessListener(documentSnapshot-> {
                     Users user = documentSnapshot.toObject(Users.class);
                     liveData.postValue(user);

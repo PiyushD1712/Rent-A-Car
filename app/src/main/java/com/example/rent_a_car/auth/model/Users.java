@@ -1,6 +1,7 @@
 package com.example.rent_a_car.auth.model;
 
 public class Users {
+
     private String id;
     private String firstName;
     private String lastName;

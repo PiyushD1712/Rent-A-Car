@@ -1,12 +1,15 @@
 package com.example.rent_a_car.home.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +18,7 @@ import com.example.rent_a_car.R;
 import com.example.rent_a_car.databinding.CarListBinding;
 import com.example.rent_a_car.home.model.CarRent;
 import com.example.rent_a_car.home.viewmodel.CarViewModel;
+import com.example.rent_a_car.home.views.CarActivity;
 
 import java.util.List;
 
@@ -50,11 +54,24 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         private CarListBinding binding;
         public MyViewHolder(CarListBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener(v->{
+                int position = getAdapterPosition();
+                CarRent carRent = list.get(position);
+                Bundle args = new Bundle();
+                args.putString("carName", carRent.getCarName());
+                args.putString("carDesc", carRent.getDescription());
+                args.putInt("carPrice", carRent.getPrice());
+                args.putString("carOwnerId", carRent.getOwnerId());
+                args.putString("carImageUrl", carRent.getImgUrl());
+                Intent intent = new Intent(context, CarActivity.class);
+                intent.putExtras(args);
+                context.startActivity(intent);
+            });
         }
     }
 }
