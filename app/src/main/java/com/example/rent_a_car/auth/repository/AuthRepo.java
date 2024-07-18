@@ -2,6 +2,7 @@ package com.example.rent_a_car.auth.repository;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,13 +19,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.core.UserData;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AuthRepo {
     private final String userCollection = "users";
@@ -34,6 +44,9 @@ public class AuthRepo {
     private FirebaseFirestore fireStore;
     private FirebaseUser firebaseUser;
     private CollectionReference collectionReference;
+    private FirebaseStorage storage;
+    private StorageReference reference;
+    private StorageReference userImageReference;
 
     public AuthRepo(Context context){
         this.context = context;
@@ -42,6 +55,9 @@ public class AuthRepo {
         service = new UserService();
         firebaseUser = auth.getCurrentUser();
         collectionReference = fireStore.collection(userCollection);
+        storage = FirebaseStorage.getInstance();
+        reference = storage.getReference();
+        userImageReference = reference.child("users").child("user_image_"+ Timestamp.now().getSeconds());
     }
 
     public void registerUserViaMail(Users users){
@@ -112,5 +128,46 @@ public class AuthRepo {
                     Toast.makeText(context, "Failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
         return liveData;
+    }
+
+    public void updateUserDetails(Users user){
+        boolean status = service.checkUser(user);
+        if(status){
+            userImageReference.putFile(Uri.parse(user.getImgUrl()))
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            userImageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    user.setImgUrl(uri.toString());
+                                    Map<String,Object> updates = new HashMap<>();
+                                    updates.put("email",user.getEmail());
+                                    updates.put("firstName",user.getFirstName());
+                                    updates.put("lastName",user.getLastName());
+                                    updates.put("password",user.getPassword());
+                                    updates.put("phoneNo",user.getPhoneNo());
+                                    updates.put("imgUrl",user.getImgUrl());
+                                    System.out.print(user.getId());
+                                    collectionReference.document(user.getId()).update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            firebaseUser.updatePassword(user.getPassword())
+                                                    .addOnSuccessListener(unused1-> {
+                                                        Toast.makeText(context, "User Updated", Toast.LENGTH_SHORT).show();})
+                                                    .addOnFailureListener(e->e.getMessage());
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(e->e.printStackTrace());
+                        }
+                    })
+                    .addOnFailureListener(e->e.printStackTrace());
+        }
     }
 }

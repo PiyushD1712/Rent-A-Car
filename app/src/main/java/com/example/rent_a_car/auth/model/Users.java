@@ -8,17 +8,27 @@ public class Users {
     private String email;
     private String password;
     private String phoneNo;
+    private String imgUrl;
 
     public Users() {
     }
 
-    public Users(String id, String firstName, String lastName, String email, String password, String phoneNo) {
+    public Users(String id, String firstName, String lastName, String email, String password, String phoneNo, String imgUrl) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNo = phoneNo;
+        this.imgUrl = imgUrl;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getId() {

@@ -120,17 +120,5 @@ public class CarRepository {
         });
         return mutableLiveData;
     }
-    public MutableLiveData<CarRent> getCarDetails(String carId){
-        MutableLiveData<CarRent> mutableLiveData = new MutableLiveData<>();
-        carReference.document(carId).get().addOnSuccessListener(documentSnapshot-> {
-                CarRent carRent = documentSnapshot.toObject(CarRent.class);
-                mutableLiveData.postValue(carRent);
-        }).addOnFailureListener(e-> {
-                e.printStackTrace();
-                Log.v("CAR_REPOSITORY","CAR NOT FETCHED");
-        });
-        return mutableLiveData;
-    }
-
 }
 

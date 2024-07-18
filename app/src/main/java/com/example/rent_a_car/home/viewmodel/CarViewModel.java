@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.rent_a_car.auth.model.Users;
 import com.example.rent_a_car.home.model.CarRent;
 import com.example.rent_a_car.home.repository.CarRepository;
 

@@ -32,4 +32,7 @@ public class AuthViewModel extends AndroidViewModel {
     public MutableLiveData<Users> getUserDetails(String uid){
         return service.getUserDetail(uid);
     }
+    public void updateUserDetails(Users users){
+        service.updateUserDetails(users);
+    }
 }

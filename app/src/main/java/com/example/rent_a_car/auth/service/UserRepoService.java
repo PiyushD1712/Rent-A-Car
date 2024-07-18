@@ -27,4 +27,7 @@ public class UserRepoService {
     public MutableLiveData<Users> getUserDetail(String uid){
         return repo.getUserDetails(uid);
     }
+    public void updateUserDetails(Users user){
+        repo.updateUserDetails(user);
+    }
 }

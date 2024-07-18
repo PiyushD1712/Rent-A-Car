@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.rent_a_car.R;
 import com.example.rent_a_car.auth.model.Users;
 import com.example.rent_a_car.auth.viewmodel.AuthViewModel;
@@ -48,6 +49,9 @@ public class HomeActivity extends AppCompatActivity {
             if (id==R.id.idMyCars) {
                 replaceFrag(new MyCarFragment());
             }
+            if(id==R.id.idProfile){
+                replaceFrag(new ProfileFragment());
+            }
             return true;
         });
     }
@@ -61,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
                 public void onChanged(Users users) {
                     System.out.println(users.getFirstName());
                     binding.setUser(users);
+                    Glide.with(getApplicationContext()).load(users.getImgUrl()).into(binding.idUserImage);
                 }
             });
         }
