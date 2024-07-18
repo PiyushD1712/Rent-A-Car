@@ -58,9 +58,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser user  = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null){
-            model.getUserDetails(user.getUid()).observe(this, new Observer<Users>() {
+        FirebaseUser firebaseUser  = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser!=null){
+            model.getUserDetails(firebaseUser.getUid()).observe(this, new Observer<Users>() {
                 @Override
                 public void onChanged(Users users) {
                     System.out.println(users.getFirstName());
