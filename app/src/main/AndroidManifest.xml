@@ -15,16 +15,13 @@
         android:theme="@style/Theme.RentACar"
         tools:targetApi="31">
         <activity
-            android:name=".home.views.ProfileActivity"
+            android:name=".home.views.activity.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".home.views.MainActivity"
+            android:name=".home.views.activity.CarActivity"
             android:exported="false" />
         <activity
-            android:name=".home.views.CarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".home.views.HomeActivity"
+            android:name=".home.views.activity.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.RentACar" />

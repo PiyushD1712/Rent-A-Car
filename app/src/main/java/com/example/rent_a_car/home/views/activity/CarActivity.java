@@ -1,18 +1,12 @@
-package com.example.rent_a_car.home.views;
+package com.example.rent_a_car.home.views.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.rent_a_car.R;
 import com.example.rent_a_car.auth.model.Users;
 import com.example.rent_a_car.auth.viewmodel.AuthViewModel;
 import com.example.rent_a_car.databinding.ActivityCarBinding;

@@ -1,4 +1,4 @@
-package com.example.rent_a_car.home.views;
+package com.example.rent_a_car.home.views.fragment;
 
 import android.os.Bundle;
 

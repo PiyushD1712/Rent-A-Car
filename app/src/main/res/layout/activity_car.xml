@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:context=".home.views.CarActivity">
+        tools:context=".home.views.activity.CarActivity">
         <ImageView
             android:id="@+id/idImageCar"
             android:layout_width="match_parent"

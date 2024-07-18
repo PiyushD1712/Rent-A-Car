@@ -1,9 +1,8 @@
-package com.example.rent_a_car.home.views;
+package com.example.rent_a_car.home.views.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -19,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.rent_a_car.R;
-import com.example.rent_a_car.databinding.FragmentPersonalBinding;
 import com.example.rent_a_car.home.model.CarRent;
 import com.example.rent_a_car.home.viewmodel.CarViewModel;
 import com.google.firebase.auth.FirebaseAuth;

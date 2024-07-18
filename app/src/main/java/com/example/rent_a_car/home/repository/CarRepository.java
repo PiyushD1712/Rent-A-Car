@@ -120,5 +120,9 @@ public class CarRepository {
         });
         return mutableLiveData;
     }
+
+    public void rentCar(CarRent carRent){
+
+    }
 }
 

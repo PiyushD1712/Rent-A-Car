@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".home.views.HomeActivity">
+        tools:context=".home.views.activity.HomeActivity">
 
         <RelativeLayout
             android:id="@+id/idRelativeBar"

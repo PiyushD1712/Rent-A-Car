@@ -4,21 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.rent_a_car.R;
 import com.example.rent_a_car.databinding.CarListBinding;
 import com.example.rent_a_car.home.model.CarRent;
-import com.example.rent_a_car.home.viewmodel.CarViewModel;
-import com.example.rent_a_car.home.views.CarActivity;
+import com.example.rent_a_car.home.views.activity.CarActivity;
 
 import java.util.List;
 
