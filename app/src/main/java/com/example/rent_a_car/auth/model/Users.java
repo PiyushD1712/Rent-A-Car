@@ -1,5 +1,9 @@
 package com.example.rent_a_car.auth.model;
 
+import androidx.annotation.NonNull;
+
+import java.util.HashMap;
+
 public class Users {
 
     private String id;
@@ -79,6 +83,7 @@ public class Users {
         this.phoneNo = phoneNo;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Users{" +

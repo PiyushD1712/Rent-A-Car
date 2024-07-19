@@ -3,18 +3,12 @@ package com.example.rent_a_car.home.views.activity;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.rent_a_car.R;
 import com.example.rent_a_car.auth.model.Users;
 import com.example.rent_a_car.auth.viewmodel.AuthViewModel;
 import com.example.rent_a_car.databinding.ActivityProfileBinding;
@@ -44,12 +38,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.idSaveUserButton.setOnClickListener(v->updateUser());
 
-        model.getUserDetails(firebaseUser.getUid()).observe(this, new Observer<Users>() {
-            @Override
-            public void onChanged(Users users) {
+        model.getUserDetails(firebaseUser.getUid()).observe(this, users-> {
                 binding.setUser(users);
                 Glide.with(getApplicationContext()).load(users.getImgUrl()).into(binding.idImageUser);
-            }
         });
     }
 

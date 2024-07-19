@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.example.rent_a_car.R;
-import com.example.rent_a_car.auth.model.Users;
 import com.example.rent_a_car.auth.viewmodel.AuthViewModel;
 import com.example.rent_a_car.databinding.ActivityHomeBinding;
 import com.example.rent_a_car.home.views.fragment.HomeFragment;
@@ -23,23 +21,18 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
-    private AuthViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        model = new ViewModelProvider(this).get(AuthViewModel.class);
+        AuthViewModel model = new ViewModelProvider(this).get(AuthViewModel.class);
         FirebaseUser firebaseUser  = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser!=null){
-            model.getUserDetails(firebaseUser.getUid()).observe(this, new Observer<Users>() {
-                @Override
-                public void onChanged(Users users) {
-                    System.out.println(users.getFirstName());
+            model.getUserDetails(firebaseUser.getUid()).observe(this, users-> {
                     binding.setUser(users);
                     Glide.with(getApplicationContext()).load(users.getImgUrl()).into(binding.idUserImage);
-                }
             });
         }
         binding.idUserImage.setOnClickListener(v-> startActivity(new Intent(this,ProfileActivity.class)));
