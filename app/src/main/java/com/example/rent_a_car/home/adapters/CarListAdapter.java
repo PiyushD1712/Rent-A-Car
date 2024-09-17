@@ -59,6 +59,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyViewHo
                 int position = getAdapterPosition();
                 CarRent carRent = list.get(position);
                 Bundle args = new Bundle();
+                args.putString("id",carRent.getId());
                 args.putString("carName", carRent.getCarName());
                 args.putString("carDesc", carRent.getDescription());
                 args.putInt("carPrice", carRent.getPrice());

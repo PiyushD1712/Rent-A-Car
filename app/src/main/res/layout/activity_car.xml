@@ -43,17 +43,39 @@
         <TextView
             android:id="@+id/idCarDescription"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:text="@{car.description}"
             android:textSize="20sp"
             android:layout_below="@id/idCarName"/>
+        <EditText
+            android:id="@+id/idStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="Start Trip:"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="date"
+            android:layout_below="@id/idCarDescription"/>
+        <EditText
+            android:id="@+id/idEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="End Trip:"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="date"
+            android:layout_below="@id/idStartDate"/>
         <TextView
-            android:id="@+id/idCarOwner"
+            android:id="@+id/idTotalFare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="owner"
-            android:textSize="20sp"
-            android:layout_below="@id/idCarDescription"/>
+            android:layout_below="@id/idEndDate"
+            android:text="Total Fare: "
+            android:textSize="20sp"/>
         <Button
             android:id="@+id/idRentCarBtn"
             android:layout_width="match_parent"

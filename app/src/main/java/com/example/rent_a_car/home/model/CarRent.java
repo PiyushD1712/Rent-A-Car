@@ -1,5 +1,11 @@
 package com.example.rent_a_car.home.model;
 
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentId;
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.PropertyName;
+import com.google.firebase.firestore.ServerTimestamp;
+
 public class CarRent {
     private String id;
     private String carName;
@@ -7,6 +13,8 @@ public class CarRent {
     private String description;
     private String imgUrl;
     private String ownerId;
+    @ServerTimestamp
+    private Timestamp timestamp;
 
     public CarRent() {
     }
@@ -19,13 +27,12 @@ public class CarRent {
         this.imgUrl = imgUrl;
         this.ownerId = ownerId;
     }
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getCarName() {
@@ -66,6 +73,14 @@ public class CarRent {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Override

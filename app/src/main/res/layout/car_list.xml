@@ -7,17 +7,22 @@
             name="car"
             type="com.example.rent_a_car.home.model.CarRent" />
     </data>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/idCarTile"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardUseCompatPadding="true">
-
+        android:orientation="vertical"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="center"
+            android:src="@mipmap/ic_launcher"/>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
@@ -33,20 +38,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{String.valueOf(car.price)}"
+                android:gravity="center_vertical"
                 android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/idCarNameList"/>
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginEnd="16dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_launcher"
                 android:layout_alignParentEnd="true"/>
-
         </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#2F1F1F1F"/>
+    </LinearLayout>
 </layout>

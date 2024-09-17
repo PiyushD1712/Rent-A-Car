@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rent_a_car.auth.model.Users;
+import com.example.rent_a_car.home.model.Bookings;
 import com.example.rent_a_car.home.model.CarRent;
 import com.example.rent_a_car.home.repository.CarRepository;
 
@@ -30,5 +31,8 @@ public class CarViewModel extends AndroidViewModel {
     }
     public MutableLiveData<List<CarRent>> getPersonalCars(){
         return repository.getPersonalCars();
+    }
+    public void bookCar(Bookings bookings){
+        repository.bookCar(bookings);
     }
 }
